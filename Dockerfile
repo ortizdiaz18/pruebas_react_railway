@@ -1,4 +1,14 @@
 FROM nginx:1.20.1
-COPY /build /usr/share/nginx/html
-EXPOSE 80:80
+
+WORKDIR /app
+
+COPY package*.json .
+
+RUN npm install
+
+copy . .
+
+RUN npm run build
+
+CMD ["npm", "start"]
 
